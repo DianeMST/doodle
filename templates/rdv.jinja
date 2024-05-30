@@ -1,0 +1,67 @@
+<html>
+    <head>
+        <title> Prendre RDV | Proméo Formation </title>
+      </head>
+
+
+    <body>
+        
+      {% extends "layout.jinja" %}
+
+      {% block content %}
+
+        <div class="jumbotron">
+            <h1 class="display-4">Bienvenue !</h1>
+            <p class="lead">Vous êtes actuellement sur la page pour prendre un rendez-vous avec un formateur de Proméo.</p>
+            
+          </div>
+
+<div class="container">
+  <form action="/prendre_rdv_form" method="POST">
+    <div class="form-row">
+      <div class="form-group col-md-12">
+        <label for="nom">Nom et Prénom :</label>
+        <input type="text" class="form-control" id="nom" name="nom" placeholder="Entrez votre nom et prénom">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="email">Adresse Email :</label>
+      <input type="email" class="form-control" id="email" name="email" placeholder="Entrez votre adresse email">
+    </div>
+    <div class="form-group">
+      <label for="formateur">Sélectionnez le Formateur :</label>
+      <select class="form-control" id="formateur" name="formateur">
+        <option value="formateur1">Formateur 1</option>
+        <option value="formateur2">Formateur 2</option>
+        <option value="formateur3">Formateur 3</option>
+      </select>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="date">Date :</label>
+        <input type="date" class="form-control" id="date"name="date">
+      </div>
+      <div class="form-group col-md-6">
+        <label for="heure">Heure :</label>
+        <input type="time" class="form-control" id="heure" name="heure">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="duree">Durée du Rendez-vous :</label>
+      <select class="form-control" id="duree" name="durer">
+        <option value="30min">30 minutes</option>
+        <option value="1h">1 heure</option>
+        <option value="1h30">1 heure 30 minutes</option>
+      </select>
+    </div>
+    
+    <button type="submit" class="btn btn-primary btn-block">Prendre Rendez-vous</button>
+  </form>
+    
+</div>
+          
+
+{% endblock %}
+        
+    </body>
+</html>

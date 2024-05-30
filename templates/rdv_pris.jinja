@@ -1,0 +1,62 @@
+<html>
+    <head>
+        <title> Liste RDV | Proméo Formation </title>
+    </head>
+
+    <body>
+        
+      {% extends "layout.jinja" %}
+
+      {% block content %}
+
+        <div class="jumbotron">
+            <h1 class="display-4">Listes des rendez-vous : </h1>
+            <p class="lead">Prenez rapidement Rendez-vous avec un formateur en cliquant sur le bouton du bas !</p>
+            <hr class="my-4">
+              <a class="btn btn-primary btn-lg" href="rdv" role="button">prendre rendez vous dès maintenant.</a>
+            </p>
+          </div>
+        </div>
+        <div class="container">
+            <div class="summary-table">
+              <h2 class="text-center">Récapitulatif du Rendez-vous</h2>
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">Champ</th>
+                    <th scope="col">Valeur</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">Nom</th>
+                    <td id="summary-nom"></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Prénom</th>
+                    <td id="summary-prenom"></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Adresse Email</th>
+                    <td id="summary-email"></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Date</th>
+                    <td id="summary-date"></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Heure</th>
+                    <td id="summary-heure"></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Formateur</th>
+                    <td id="summary-formateur"></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          {% endblock %}
+        
+    </body>
+</html>

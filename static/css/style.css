@@ -1,0 +1,169 @@
+*{
+	margin:0px;
+	padding:0px;
+}
+
+
+body{
+    background-color: #eeeeee;
+    font-family: 'Roboto Mono', monospace;
+}
+
+h2{
+    text-transform: uppercase;
+}
+
+
+@import url(https://fonts.googleapis.com/css?family=Open+Sans);
+@import url(https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@1,300&display=swap);
+
+
+
+
+@import url(https://www.promeo-formation.fr/sites/default/files/css/css_g8nTVtRa2Y7I-a1G4rRZKSUjJqmQwTO5dfnoA0n4o-g.css?delta=1&language=fr&theme=default&include=eJxVkG2SwyAIhi9k9UgdFDSmRlLA3c3tN9N2k-wfeOblG0A0hr4F-IDPwt1cehBWY7nXjtQtNk6PcGGnmxotIYKSQ8owmoXSOEK7qW2t9nLIQpDMGaRZg4EYwUjV9jF-1kNOF76mZDmzMlma3nxvXMJB57qQEgtW7uGg90XU0a0gUATWSQPKWKH5U_GjryO2qhOhg241soWP95llcXs72l9gJH2vnJ-DZLtE_joKFyHVfyLM8OO-Kn1reFm_MI5Gv9OclFM);
+.logo-head{
+    margin-bottom: 5px;
+    padding: 5px;
+}
+
+
+
+nav {
+  mask-image: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, #ffffff 25%, #ffffff 75%, rgba(255, 255, 255, 0) 100%);
+  margin: 0 auto;
+  padding: 60px 0;
+  background-image: linear-gradient(to left top, #ffffff 0%, #3498db 70%);
+  width: 100%;
+}
+
+nav ul {
+  text-align: center;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.2) 25%, rgba(255, 255, 255, 0.2) 75%, rgba(255, 255, 255, 0) 100%);
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.1), inset 0 0 1px rgba(255, 255, 255, 0.6);
+}
+
+nav ul li {
+  display: inline-block;
+}
+
+nav ul li a {
+  padding: 18px;
+  font-family: 'Roboto Mono', monospace;
+  text-transform:uppercase;
+  color: white;
+  font-size: 18px;
+  text-decoration: none;
+  font-weight: bold;
+  display: block;
+}
+
+nav ul li a:hover {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1), inset 0 0 1px rgba(255, 255, 255, 0.6);
+  background: rgba(255, 255, 255, 0.1);
+  color: rgba(0, 35, 122, 0.7);
+}
+
+
+
+
+
+
+.h2-title{
+    background-color: darkgrey;
+    padding: 2px;
+    border-top: 4px double black;
+    border-bottom: 4px double black;
+    border-radius: 2px whrite ;
+}
+
+.info_contact{
+    background-color: dimgray;
+    padding: 10px;
+    
+}
+
+.jumbotron{
+    background-color: #eeeeee!important;
+}
+
+.section_site h2{
+    padding: 10px;
+}
+
+.section_site_card{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+    
+    
+}
+.card{
+    background-color: #ffffff;
+    color: black;
+    width: 350px;
+    padding: 10px;
+    border-radius: 15px ;
+    margin: 15px;
+}
+
+.card p{
+    font-size: 20px;
+}
+
+
+.card h2{
+    color: #155E7E;
+    font-size: 45px;
+
+    
+}
+
+
+.footer_copy{
+    background-image: linear-gradient(to right bottom, #ffffff 0%, #3498db 80%  );
+    padding: 10px;
+}
+
+.footer_copyright{
+    padding: 10px;
+}
+
+
+
+.footer_copyright p{
+    color: white;
+}
+
+.btn-sites{
+    margin-left: 75%;
+    background-color: #3498db;
+    padding: 10px;
+    text-transform: uppercase!important;
+    color: #fff;
+    border-radius: 5px;
+}
+
+.btn-sites:hover{
+    margin-left: 75%;
+    background-color: white;
+    padding: 3px;
+    color: #3498db;
+    padding: 10px;
+    text-transform: uppercase!important;
+    border-radius: 5px;
+    border: 2px solid #3498db;
+}
+
+.section_site{
+    background-image: linear-gradient(to left top, #ffffff 50%, #3498db 60%  );
+    padding-bottom: 20px;
+}
+.img_site_promeo{
+    max-width: -webkit-fill-available;
+}
+
+a{
+    text-decoration: none;
+    text-transform: none;
+}
