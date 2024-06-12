@@ -1,62 +1,46 @@
+<!DOCTYPE html>
 <html>
-    <head>
-        <title> Liste RDV | Proméo Formation </title>
-    </head>
+<head>
+    <title> Liste RDV | Proméo Formation </title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
 
-    <body>
-        
-      {% extends "layout.jinja" %}
+<body>
+    {% extends "layout.jinja" %}
 
-      {% block content %}
-
-        <div class="jumbotron">
-            <h1 class="display-4">Listes des rendez-vous : </h1>
-            <p class="lead">Prenez rapidement Rendez-vous avec un formateur en cliquant sur le bouton du bas !</p>
-            <hr class="my-4">
-              <a class="btn btn-primary btn-lg" href="rdv" role="button">prendre rendez vous dès maintenant.</a>
-            </p>
-          </div>
-        </div>
-        <div class="container">
-            <div class="summary-table">
-              <h2 class="text-center">Récapitulatif du Rendez-vous</h2>
-              <table class="table">
+    {% block content %}
+    <div class="jumbotron">
+        <h1 class="display-4">Listes des rendez-vous pour vous : {{ formateur.Prenom }} {{ formateur.Nom }}</h1>
+    </div>
+    <div class="container">
+        <div class="summary-table">
+            <h2 class="text-center">Récapitulatif des Rendez-vous</h2>
+            <table class="table">
                 <thead>
-                  <tr>
-                    <th scope="col">Champ</th>
-                    <th scope="col">Valeur</th>
-                  </tr>
+                    <tr>
+                        <th scope="col">Nom</th>
+                        <th scope="col">Prénom</th>
+                        <th scope="col">Adresse Email</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">Heure</th>
+                        
+                    </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <th scope="row">Nom</th>
-                    <td id="summary-nom"></td>
-                  </tr>
-                  <tr>
-                    <th scope="row">Prénom</th>
-                    <td id="summary-prenom"></td>
-                  </tr>
-                  <tr>
-                    <th scope="row">Adresse Email</th>
-                    <td id="summary-email"></td>
-                  </tr>
-                  <tr>
-                    <th scope="row">Date</th>
-                    <td id="summary-date"></td>
-                  </tr>
-                  <tr>
-                    <th scope="row">Heure</th>
-                    <td id="summary-heure"></td>
-                  </tr>
-                  <tr>
-                    <th scope="row">Formateur</th>
-                    <td id="summary-formateur"></td>
-                  </tr>
+                    {% for rdv in rdvs %}
+                    <tr>
+                        <td>{{ rdv.Nom }}</td>
+                        <td>{{ rdv.Prenom }}</td>
+                        <td>{{ rdv.Mail }}</td>
+                        <td>{{ rdv.Date.strftime('%Y-%m-%d') }}</td>
+                        <td>{{ rdv.Heure.strftime('%H:%M') }}</td>
+                        
+                    </tr>
+                    {% endfor %}
                 </tbody>
-              </table>
-            </div>
-          </div>
-          {% endblock %}
-        
-    </body>
+            </table>
+        </div>
+    </div>
+    {% endblock %}
+</body>
 </html>

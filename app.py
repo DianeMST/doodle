@@ -3,20 +3,27 @@ from pony.flask import Pony
 from flask_mail import Mail, Message
 from pony.orm import *
 from datetime import datetime, date
+from werkzeug.security import check_password_hash
+import os
+from dotenv import load_dotenv
+
+
+load_dotenv()
 
 app = Flask(__name__)
 app.config.update(dict(
-    SECRET_KEY = 'QQQQQQQQQQQQQQQQQQQQQ'
+    SECRET_KEY=os.getenv('SECRET_KEY')
 ))
 
 app.config.update(
-MAIL_SERVER = "smtp.gmail.com",
-MAIL_PORT = 465,
-MAIL_USE_SSL = "MAIL_USE_SSL",
-MAIL_USERNAME = "yoancourspromeo@gmail.com",
-MAIL_PASSWORD = "oehfwyycnrbaxows",
+    MAIL_SERVER=os.getenv('MAIL_SERVER'),
+    MAIL_PORT=int(os.getenv('MAIL_PORT')),
+    MAIL_USE_SSL=os.getenv('MAIL_USE_SSL') == 'True',
+    MAIL_USERNAME=os.getenv('MAIL_USERNAME'),
+    MAIL_PASSWORD=os.getenv('MAIL_PASSWORD'),
 )
 mail = Mail(app)
+
 
 #Database config
 
@@ -66,7 +73,8 @@ class RDV(db.Entity):
     Url_invitation = Optional(str)
 
 
-db.bind(provider='mysql', host='localhost', user='doodle', password='doodle', database='doodle')
+db.bind(provider=os.getenv('DB_PROVIDER'), host=os.getenv('DB_HOST'), user=os.getenv('DB_USER'),
+        password=os.getenv('DB_PASSWORD'), database=os.getenv('DB_DATABASE'))
 db.generate_mapping(create_tables=True)
 
 
@@ -94,13 +102,12 @@ def loginFormateur():
         mdp = request.form['mdp']
         with db_session:
             print('valide')
-            user = Formateur.get(username = username, mdp = mdp)
-            if user:
+            user = Formateur.get(username=username)
+            if user and check_password_hash(user.mdp, mdp):
                 session['loggedin'] = True
                 session['id'] = user.id
                 session['type'] = 'formateur'
-                return make_response (redirect('validelogin'))
-                
+                return make_response(redirect('validelogin'))
             else:
                 msg = 'Incorrect username/mdp!'
     return render_template('loginFormateur.jinja', msg=msg)
@@ -114,8 +121,8 @@ def loginEleve():
         mdp = request.form['mdp']
         with db_session:
             print('valide')
-            user = Eleve.get(username=username, mdp=mdp)
-            if user:
+            user = Eleve.get(username=username)
+            if user and check_password_hash(user.mdp, mdp):
                 session['loggedin'] = True
                 session['id'] = user.id
                 session['username'] = user.username
@@ -135,13 +142,20 @@ def logout():
     session.pop('type', None)
     return redirect(('validelogout'))
 
+
 @app.route('/rdv_pris')
 def rdv_pris():
     if 'loggedin' in session and session.get('type') == 'formateur':
-        return render_template('rdv_pris.jinja')
+        with db_session:
+            formateur_id = session['id']
+            formateur = Formateur.get(id=formateur_id)
+            rdvs = RDV.select(lambda r: r.Formateur.id == formateur_id)[:]
+        return render_template('rdv_pris.jinja', rdvs=rdvs, formateur=formateur)
     else:
         flash('Role incorrect')
         return redirect((''))
+
+
 
 @app.route('/rdv')
 def rdv():
