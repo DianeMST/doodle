@@ -1,67 +1,83 @@
+<!DOCTYPE html>
 <html>
-    <head>
-        <title> Prendre RDV | Proméo Formation </title>
-      </head>
-
-
-    <body>
-        
-      {% extends "layout.jinja" %}
-
-      {% block content %}
-
-        <div class="jumbotron">
-            <h1 class="display-4">Bienvenue !</h1>
-            <p class="lead">Vous êtes actuellement sur la page pour prendre un rendez-vous avec un formateur de Proméo.</p>
-            
-          </div>
-
-<div class="container">
-  <form action="/prendre_rdv_form" method="POST">
-    <div class="form-row">
-      <div class="form-group col-md-12">
-        <label for="nom">Nom et Prénom :</label>
-        <input type="text" class="form-control" id="nom" name="nom" placeholder="Entrez votre nom et prénom">
-      </div>
+<head>
+    <title> Prendre RDV | Proméo Formation </title>
+</head>
+<body>
+    {% extends "layout.jinja" %}
+    {% block content %}
+    <div class="jumbotron">
+        <h1 class="display-4">Bienvenue {{ session['username'] }} !</h1>
+        <p class="lead">Vous êtes actuellement sur la page pour prendre un rendez-vous avec un formateur de Proméo.</p>
     </div>
-    <div class="form-group">
-      <label for="email">Adresse Email :</label>
-      <input type="email" class="form-control" id="email" name="email" placeholder="Entrez votre adresse email">
-    </div>
-    <div class="form-group">
-      <label for="formateur">Sélectionnez le Formateur :</label>
-      <select class="form-control" id="formateur" name="formateur">
-        <option value="formateur1">Formateur 1</option>
-        <option value="formateur2">Formateur 2</option>
-        <option value="formateur3">Formateur 3</option>
-      </select>
-    </div>
-    <div class="form-row">
-      <div class="form-group col-md-6">
-        <label for="date">Date :</label>
-        <input type="date" class="form-control" id="date"name="date">
-      </div>
-      <div class="form-group col-md-6">
-        <label for="heure">Heure :</label>
-        <input type="time" class="form-control" id="heure" name="heure">
-      </div>
-    </div>
-    <div class="form-group">
-      <label for="duree">Durée du Rendez-vous :</label>
-      <select class="form-control" id="duree" name="durer">
-        <option value="30min">30 minutes</option>
-        <option value="1h">1 heure</option>
-        <option value="1h30">1 heure 30 minutes</option>
-      </select>
-    </div>
-    
-    <button type="submit" class="btn btn-primary btn-block">Prendre Rendez-vous</button>
-  </form>
-    
-</div>
-          
 
-{% endblock %}
-        
-    </body>
+    <div class="container">
+        <form action="/prendre_rdv_form" method="POST">
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <label for="nom">Nom :</label>
+                    <input type="text" class="form-control" id="nom" name="nom" value="{{ session.get('Nom', '') }}" readonly>
+                </div>
+                <div class="form-group col-md-12">
+                    <label for="prenom">Prénom :</label>
+                    <input type="text" class="form-control" id="prenom" name="prenom" value="{{ session.get('Prenom', '') }}" readonly>
+                </div>
+                <div class="form-group col-md-12">
+                    <label for="email">Adresse Email :</label>
+                    <input type="email" class="form-control" id="email" name="email" value="{{ session.get('Mail', '') }}" readonly>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="formateur">Sélectionnez le Formateur :</label>
+                <select class="form-control" id="formateur" name="formateur">
+                    {% for formateur in formateurs %}
+                        <option value="{{ formateur.id }}">{{ formateur.Prenom }} {{ formateur.Nom }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="formation">Sélectionnez la Formation :</label>
+                <select class="form-control" id="formation" name="formation">
+                    {% for formation in formations %}
+                        <option value="{{ formation.id }}">{{ formation.Nom }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="date">Date :</label>
+                    <input type="date" class="form-control" id="date" name="date">
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="heure">Heure :</label>
+                    <select class="form-control" id="heure" name="heure">
+                        {% for hour in range(8, 17) %}
+                            <option value="{{ '{:02d}'.format(hour) }}">{{ '{:02d}'.format(hour) }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="minute">Minute :</label>
+                    <select class="form-control" id="minute" name="minute">
+                        <option value="00">00</option>
+                        <option value="30">30</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="duree">Durée du Rendez-vous :</label>
+                <select class="form-control" id="duree" name="durer">
+                    <option value="30">30 minutes</option>
+                    <option value="45">45 minutes</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="telephone">Numéro de Téléphone :</label>
+                <input type="text" class="form-control" id="telephone" name="telephone" placeholder="Entrez votre numéro de téléphone">
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Prendre Rendez-vous</button>
+        </form>
+    </div>
+    {% endblock %}
+</body>
 </html>
