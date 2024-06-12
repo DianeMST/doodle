@@ -1,33 +1,32 @@
+<!DOCTYPE html>
 <html>
-    <head>
-        <title> Accueil | Proméo Formation </title>
-    </head>
-    <body>
-        
-      {% extends "layout.jinja" %}
+<head>
+    <title> Accueil | Proméo Formation </title>
+</head>
+<body>
 
-      {% block content %}
+    {% extends "layout.jinja" %}
 
-        <div class="jumbotron">
-            <h1 class="display-4">
-                Bienvenue
-                {% if username %}
-                    {{ username }} !
-                {% else %}
-                    !
-                {% endif %}
-            </h1>
+    {% block content %}
+
+    <div class="jumbotron">
+        <h1 class="display-4">
+            Bienvenue
+            {% if username %}
+                {{ username }} !
+            {% else %}
+                !
+            {% endif %}
+        </h1>
+        {% if not username %}
             <p class="lead">Prenez rapidement Rendez-vous avec un formateur en cliquant sur le bouton du bas !</p>
             <hr class="my-4">
-            {% if username %}
-                <a class="btn btn-primary btn-lg" href="biento" role="button">Bientot Cliquable</a>
-            {% else %}
-                <a class="btn btn-primary btn-lg" href="loginFormateur" role="button">Connexion formateur</a>
-                <a class="btn btn-primary btn-lg" href="loginEleve" role="button">Connexion Eleve</a>
-            {% endif %}
-          </div>
-        
-      {% endblock %}
-        
-    </body>
+            <a class="btn btn-primary btn-lg" href="loginFormateur" role="button">Connexion formateur</a>
+            <a class="btn btn-primary btn-lg" href="loginEleve" role="button">Connexion Eleve</a>
+        {% endif %}
+    </div>
+
+    {% endblock %}
+
+</body>
 </html>

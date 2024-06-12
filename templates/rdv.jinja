@@ -2,6 +2,35 @@
 <html>
 <head>
     <title> Prendre RDV | Proméo Formation </title>
+    <script>
+        
+        function setMinDate() {
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('date').setAttribute('min', today);
+        }
+
+        
+        function validateDate() {
+            const dateInput = document.getElementById('date');
+            const dateError = document.getElementById('date-error');
+            const selectedDate = new Date(dateInput.value);
+            const today = new Date();
+            today.setHours(0, 0, 0, 0); 
+
+            if (selectedDate < today) {
+                dateError.textContent = 'La date sélectionnée doit être après la date d\'aujourd\'hui.';
+            } else {
+                dateError.textContent = '';
+            }
+        }
+
+        
+        window.onload = function() {
+            setMinDate();
+        };
+
+    </script>
+    {# je n'arrivais pas a extraire le script bizzarement alors je l'ai remis ici #}
 </head>
 <body>
     {% extends "layout.jinja" %}
@@ -46,7 +75,8 @@
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="date">Date :</label>
-                    <input type="date" class="form-control" id="date" name="date">
+                    <input type="date" class="form-control" id="date" name="date" onchange="validateDate()">
+                    <small id="date-error" class="form-text text-danger"></small>
                 </div>
                 <div class="form-group col-md-3">
                     <label for="heure">Heure :</label>

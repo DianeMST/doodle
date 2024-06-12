@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, session, make_response, flash
+from flask import Flask, render_template, request, redirect, session, make_response, flash, url_for
 from pony.flask import Pony
 from flask_mail import Mail, Message
 from pony.orm import *
@@ -182,7 +182,6 @@ def prendre_rdv_form():
     duree = request.form.get('durer')
     telephone = request.form.get('telephone')
 
-    # Ajout de messages de débogage
     missing_fields = []
     for field_name, field_value in [('nom', nom), ('prenom', prenom), ('email', email), ('formateur_id', formateur_id),
                                     ('formation_id', formation_id), ('date', date_str), ('heure', heure_str), ('minute', minute_str),
@@ -227,6 +226,36 @@ def prendre_rdv_form():
     mail.send(msg)
     return render_template('validation_prendrerdv_form.jinja')
 
+@app.route('/delete_rdv/<int:rdv_id>', methods=['POST'])
+def delete_rdv(rdv_id):
+    if 'loggedin' in session and session.get('type') == 'formateur':
+        with db_session:
+            rdv = RDV.get(id=rdv_id)
+            if rdv and rdv.Formateur.id == session['id']:
+                msg = Message(
+                    subject="Annulation du rendez-vous",
+                    sender="yoancourspromeo@gmail.com",
+                    recipients=[rdv.Mail],
+                    body=f"""Bonjour {rdv.Prenom} {rdv.Nom},
+
+Votre rendez-vous avec le formateur {rdv.Formateur.Prenom} {rdv.Formateur.Nom} prévu le {rdv.Date.strftime('%Y-%m-%d')} à {rdv.Heure.strftime('%H:%M')} a été annulé.
+
+Cordialement,
+Proméo Formation"""
+                )
+                mail.send(msg)
+                
+                rdv.delete()
+                commit()
+                flash('Rendez-vous supprimé avec succès.')
+                
+                return redirect(url_for('rdv_pris'))
+            else:
+                flash('Action non autorisée.')
+        return redirect(url_for('index'))
+    else:
+        flash('Role incorrect')
+        return redirect(url_for('index'))
 
 @app.route('/contact')
 def contact():
