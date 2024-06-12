@@ -1,3 +1,5 @@
+La bdd est présente dans les fichiers
+
 # Application Web Proméo Formation
 
 Cette application web est celle du projet de M.Delpeche
