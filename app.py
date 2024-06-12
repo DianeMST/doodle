@@ -63,7 +63,7 @@ db.generate_mapping(create_tables=True)
 #Route page index qui affiche directement ce connecter
 @app.route('/')
 def indexlogin():
-    return render_template('login.jinja')
+    return render_template('index.jinja')
 #ROute page d'accueil
 @app.route('/index')
 def index():
@@ -73,8 +73,8 @@ def index():
 def validelogin():
     return render_template('validelogin.jinja')
 
-@app.route('/login', methods=['GET', 'POST'])
-def login():
+@app.route('/loginFormateur', methods=['GET', 'POST'])
+def loginFormateur():
     msg = ''
     if request.method == 'POST' and 'username' in request.form and 'mdp' in request.form:
         username = request.form['username']
@@ -90,7 +90,29 @@ def login():
                 
             else:
                 msg = 'Incorrect username/mdp!'
-    return render_template('login.jinja', msg=msg)
+    return render_template('loginFormateur.jinja', msg=msg)
+
+
+@app.route('/loginEleve', methods=['GET', 'POST'])
+def loginEleve():
+    msg = ''
+    if request.method == 'POST' and 'username' in request.form and 'mdp' in request.form:
+        username = request.form['username']
+        mdp = request.form['mdp']
+        with db_session:
+            print('valide')
+            user = Formateur.get(username = username, mdp = mdp)
+            if user:
+                session['loggedin'] = True
+                session['id'] = user.id
+                session['username'] = user.username
+                return make_response (redirect('validelogin'))
+                
+            else:
+                msg = 'Incorrect username/mdp!'
+    return render_template('loginEleve.jinja', msg=msg)
+
+
 
 @app.route('/rdv_pris')
 def rdv_pris():
