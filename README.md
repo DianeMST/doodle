@@ -1,6 +1,6 @@
 # Application Web Proméo Formation
 
-Cette application web facilite la planification et la gestion des rendez-vous avec les formateurs de Proméo Formation. Elle inclut des fonctionnalités pour les connexions des élèves et des formateurs, la planification des rendez-vous, et les notifications par email pour la création et la suppression des rendez-vous. De plus, elle restreint l'accès aux URLs sensibles en fonction des sessions utilisateur et met à jour dynamiquement les menus de navigation en fonction de l'état de la session.
+Cette application web est celle du projet de M.Delpeche
 
 ## Fonctionnalités
 
@@ -28,19 +28,7 @@ Les menus de navigation de l'application sont mis à jour dynamiquement en fonct
 - **Utilisateurs Connectés** : Un message de bienvenue personnalisé et les liens pertinents sont affichés.
 - **Utilisateurs Déconnectés** : Les options de connexion pour les élèves et les formateurs sont fournies.
 
-## Installation et Configuration
 
-1. **Cloner le Dépôt** :
-    ```bash
-    git clone https://github.com/votrenomutilisateur/promeo-formation.git
-    cd promeo-formation
-    ```
-
-2. **Installer les Dépendances** :
-    Utilisez `poetry` pour installer les dépendances.
-    ```bash
-    poetry install
-    ```
 
 3. **Créer un Fichier .env** :
     Créez un fichier `.env` dans le répertoire racine et ajoutez les configurations suivantes :
@@ -57,11 +45,23 @@ Les menus de navigation de l'application sont mis à jour dynamiquement en fonct
     DB_PASSWORD=votre_mot_de_passe_db
     DB_DATABASE=nom_de_votre_db
     ```
+    Le notre au cas ou: 
 
-4. **Lancer l'Application** :
-    ```bash
-    poetry run flask run
     ```
+    SECRET_KEY=QQQQQQQQQQQQQQQQQQQQQ
+    MAIL_SERVER=smtp.gmail.com
+    MAIL_PORT=465
+    MAIL_USE_SSL=True
+    MAIL_USERNAME=yoancourspromeo@gmail.com
+    MAIL_PASSWORD=oehfwyycnrbaxows
+    DB_PROVIDER=mysql
+    DB_HOST=localhost
+    DB_USER=doodle
+    DB_PASSWORD=doodle
+    DB_DATABASE=doodle
+    
+```
+
 
 ## Utilisation
 
@@ -90,10 +90,11 @@ Les menus de navigation de l'application sont mis à jour dynamiquement en fonct
 
 - Les menus de navigation seront mis à jour en fonction de l'état actuel de la session, affichant les options pertinentes et les messages personnalisés.
 
-## Contribution
+### Choses qui auraiet pu etre en plus
 
-Veuillez ouvrir des issues et soumettre des pull requests pour tout changement ou amélioration.
+- Usage des centres 
+- Deplacer le rdv impossible
+- Usage des disponibilités
+- Pas de CRUD
 
-## Licence
 
-Ce projet est sous licence MIT.
