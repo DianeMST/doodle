@@ -17,8 +17,8 @@ app.config.update(dict(
 
 app.config.update(
     MAIL_SERVER=os.getenv('MAIL_SERVER'),
-    MAIL_PORT=int(os.getenv('MAIL_PORT')),
-    MAIL_USE_SSL=os.getenv('MAIL_USE_SSL') == 'True',
+    MAIL_PORT=os.getenv('MAIL_PORT'),
+    MAIL_USE_SSL=os.getenv('MAIL_USE_SSL'),
     MAIL_USERNAME=os.getenv('MAIL_USERNAME'),
     MAIL_PASSWORD=os.getenv('MAIL_PASSWORD'),
 )
@@ -207,7 +207,7 @@ def prendre_rdv_form():
         RDV(
             Heure=date_time,
             Duree=int(duree),
-            Date=date_only,  # Use the date part only
+            Date=date_only,  
             Formateur=formateur,
             Formation=formation,
             Nom=nom,

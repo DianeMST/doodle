@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "doodle"
+name = "doodleApp"
 version = "0.1.0"
 description = ""
 authors = ["Gasteau Louca <lgasteau@hotmail.fr>"]
@@ -11,7 +11,10 @@ flask = "^3.0.1"
 pony = "^0.7.17"
 pymysql = "^1.1.0"
 python-dotenv = "^1.0.1"
-
+doodle = "^0.1.0"
+Werkzeug = "^3.0.1"
+Flask-Mail = "^0.9.1"
+cryptography = "^42.0.8"
 
 [build-system]
 requires = ["poetry-core"]
