@@ -1,14 +1,29 @@
 FROM python:3.10-slim
-WORKDIR /app
-RUN apt-get update && apt-get install -y git curl build-essential
-RUN curl -sSL https://install.python-poetry.org | python3 -
-ENV PATH="/root/.local/bin:$PATH"
+
+RUN useradd -m flask
+RUN pip install poetry
+
+USER flask
+
+WORKDIR /home/flask/app
+COPY --chown=flask:flask . .
+
+ENV PATH="/home/flask/.local/bin:$PATH"
+
 ENV POETRY_NO_INTERACTION=1 \
     POETRY_VIRTUALENVS_CREATE=false \
-    POETRY_CACHE_DIR='/var/cache/pypoetry' \
-    POETRY_HOME='/root/.local'
+    POETRY_HOME='/home/flask/.local'
 
-COPY . /app
-RUN poetry install --no-root
+USER root 
+
+RUN pip install cryptography
+RUN mkdir -p /usr/local/lib/python3.10/site-packages /usr/local/bin && \
+    chown -R flask:flask /usr/local/lib/python3.10/site-packages /usr/local/bin
+
+USER flask
+
+RUN poetry install --only main --no-interaction --no-root
+
+CMD [ "python3", "-m" , "flask", "run","--host=0.0.0.0"]
+
 EXPOSE 5000
-CMD ["python3", "-m", "flask", "run", "--host=0.0.0.0"]
