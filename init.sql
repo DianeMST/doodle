@@ -80,12 +80,6 @@ CREATE TABLE `formateur` (
 -- Déchargement des données de la table `formateur`
 --
 
-INSERT INTO `formateur` (`id`, `username`, `nom`, `prenom`, `mdp`, `mail`) VALUES
-(1, 'formateur1', 'Baucherel', 'Philippe', 'scrypt:32768:8:1$nV3EsOxi79bq9b3C$075c9d3d16a15dfdc9f4e0670825ee5540997881952cd1263bb750dc3b0397d91b05590650fc620ff9136854a59061f256a3e8164acdcb421fefc4de3c45455b', 'formateur1@gmail.com'),
-(2, 'formateur2', 'Gasteau', 'Louca', 'scrypt:32768:8:1$32yWwUpDLgtWeO7G$5a4a0793f8e5be49e40e4dc1be4cfe7bd22a7474ad14c3f429a6233435f9aac7d0517a693f71a78337f224a87893e792c90ba2dbecdcd6ee489ce77436fdb28d', 'gasteaulouca@promeo.com');
-
--- --------------------------------------------------------
-
 --
 -- Structure de la table `formation`
 --
@@ -125,6 +119,11 @@ CREATE TABLE `rdv` (
 INSERT INTO `formation` (`id`, `nom`) VALUES
 (1, 'LP-RGI'),
 (2, 'LP-Cyber');
+
+INSERT INTO `formateur` (`id`, `username`, `nom`, `prenom`, `mdp`, `mail`) VALUES
+(1, 'formateur1', 'Baucherel', 'Philippe', 'scrypt:32768:8:1$nV3EsOxi79bq9b3C$075c9d3d16a15dfdc9f4e0670825ee5540997881952cd1263bb750dc3b0397d91b05590650fc620ff9136854a59061f256a3e8164acdcb421fefc4de3c45455b', 'formateur1@gmail.com'),
+(2, 'formateur2', 'Gasteau', 'Louca', 'scrypt:32768:8:1$32yWwUpDLgtWeO7G$5a4a0793f8e5be49e40e4dc1be4cfe7bd22a7474ad14c3f429a6233435f9aac7d0517a693f71a78337f224a87893e792c90ba2dbecdcd6ee489ce77436fdb28d', 'gasteaulouca@promeo.com');
+
 
 INSERT INTO `eleve` (`id`, `username`, `nom`, `prenom`, `mdp`, `mail`) VALUES
 (1, 'eleve1', 'Vandamme', 'Bastien', 'scrypt:32768:8:1$olyjgm8r92XyEZNm$6bac6855a3d7824ccc4904d8e6431c59ce4561dbb469d1f1611d9a1617b5863daee6ef925b4ce5dda51f5781c2a20b61fa0708594ed07ee7d2173fc07c2c2526', 'bastien@angrybirds.com');
