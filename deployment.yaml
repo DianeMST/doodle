@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flask-app-deployment
+  labels:
+    app: flask-app
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: flask-app
+  template:
+    metadata:
+      labels:
+        app: flask-app
+    spec:
+      containers:
+      - name: flask-app-container
+        image: my-flask-app:latest
+        ports:
+        - containerPort: 5000
+        env:
+        - name: PATH
+          value: "/home/flask/.local/bin:$PATH"
+        - name: POETRY_NO_INTERACTION
+          value: "1"
+        - name: POETRY_VIRTUALENVS_CREATE
+          value: "false"
+        - name: POETRY_HOME
+          value: "/home/flask/.local"
