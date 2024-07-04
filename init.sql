@@ -39,9 +39,7 @@ CREATE TABLE `centre` (
 -- Déchargement des données de la table `centre`
 --
 
-INSERT INTO `centre` (`id`, `ville`, `adresse`) VALUES
-(1, 'Beauvais', ' 6 Av. Paul Henri Spaak'),
-(2, 'Clermont', ' 6 Av. Paul clermont');
+
 
 -- --------------------------------------------------------
 
@@ -62,8 +60,6 @@ CREATE TABLE `eleve` (
 -- Déchargement des données de la table `eleve`
 --
 
-INSERT INTO `eleve` (`id`, `username`, `nom`, `prenom`, `mdp`, `mail`) VALUES
-(1, 'eleve1', 'Vandamme', 'Bastien', 'scrypt:32768:8:1$olyjgm8r92XyEZNm$6bac6855a3d7824ccc4904d8e6431c59ce4561dbb469d1f1611d9a1617b5863daee6ef925b4ce5dda51f5781c2a20b61fa0708594ed07ee7d2173fc07c2c2526', 'bastien@angrybirds.com');
 
 -- --------------------------------------------------------
 
@@ -103,9 +99,7 @@ CREATE TABLE `formation` (
 -- Déchargement des données de la table `formation`
 --
 
-INSERT INTO `formation` (`id`, `nom`) VALUES
-(1, 'LP-RGI'),
-(2, 'LP-Cyber');
+
 
 -- --------------------------------------------------------
 
@@ -126,6 +120,21 @@ CREATE TABLE `rdv` (
   `telephone` varchar(255) NOT NULL,
   `url_invitation` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+
+INSERT INTO `formation` (`id`, `nom`) VALUES
+(1, 'LP-RGI'),
+(2, 'LP-Cyber');
+
+INSERT INTO `eleve` (`id`, `username`, `nom`, `prenom`, `mdp`, `mail`) VALUES
+(1, 'eleve1', 'Vandamme', 'Bastien', 'scrypt:32768:8:1$olyjgm8r92XyEZNm$6bac6855a3d7824ccc4904d8e6431c59ce4561dbb469d1f1611d9a1617b5863daee6ef925b4ce5dda51f5781c2a20b61fa0708594ed07ee7d2173fc07c2c2526', 'bastien@angrybirds.com');
+
+
+INSERT INTO `centre` (`id`, `ville`, `adresse`) VALUES
+(1, 'Beauvais', ' 6 Av. Paul Henri Spaak'),
+(2, 'Clermont', ' 6 Av. Paul clermont');
+
+
 
 --
 -- Index pour les tables déchargées
